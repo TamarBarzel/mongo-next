@@ -1,6 +1,6 @@
 import connect from "@/app/lib/db/mongoConnection";
 import { NextRequest, NextResponse } from "next/server";
-import Car from "@/app/lib/models/car";
+import Book from "@/app/lib/models/book";
 
 
 export async function PUT(req: NextRequest, { params }: { params: { _id: String } }) {
@@ -13,27 +13,27 @@ export async function PUT(req: NextRequest, { params }: { params: { _id: String 
       console.log(params._id);
       
       return NextResponse.json(
-        { message: "car _id is required" },
+        { message: "book _id is required" },
         { status: 400 }
       );
     }
-    const updateCar = await Car.findOneAndUpdate(
+    const updateBook = await Book.findOneAndUpdate(
       { _id: params._id }, 
       { ...updateData },
       { new: true, runValidators: true }
     );
-    if (!updateCar) {
-      return NextResponse.json({ message: "car not found" }, { status: 404 });
+    if (!updateBook) {
+      return NextResponse.json({ message: "book not found" }, { status: 404 });
     }
 
     return NextResponse.json(
-      { message: "car updated successfully" },
+      { message: "book updated successfully" },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error updating car:", error);
+    console.error("Error updating book:", error);
     return NextResponse.json(
-      { message: "Error creating car", error },
+      { message: "Error creating book", error },
       { status: 500 }
     );
   }
@@ -45,22 +45,22 @@ export async function DELETE(req: NextRequest, { params }: { params: { _id: Stri
 
     if (!params._id) {
       return NextResponse.json(
-        { message: "car _id is required" },
+        { message: "book _id is required" },
         { status: 400 }
       );
     }
-    const deletedCar = await Car.findOneAndDelete({ _id: params._id });
-    if (!deletedCar) {
-      return NextResponse.json({ message: "car not found" }, { status: 404 });
+    const deletedBook = await Book.findOneAndDelete({ _id: params._id }); 
+    if (!deletedBook) {
+      return NextResponse.json({ message: "book not found" }, { status: 404 });
     }
     return NextResponse.json(
-      { message: "car deleted successfully", data: deletedCar },
+      { message: "book deleted successfully", data: deletedBook },
       { status: 200 }
     );
   } catch (error) {
-    console.error("failed deleting car", error);
+    console.error("failed deleting book", error);
     return NextResponse.json(
-      { message: "error deleting car", error },
+      { message: "error deleting book", error },
       { status: 500 }
     );
   }

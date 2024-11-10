@@ -1,18 +1,18 @@
 import connect from "@/app/lib/db/mongoConnection";
 import { NextRequest, NextResponse } from "next/server";
-import CarSchema from "@/app/lib/models/car";
-import Car from "@/app/lib/models/car";
+import BookSchema from "@/app/lib/models/book";
+import Book from "@/app/lib/models/book";
 
 export async function GET() {
   try {
     await connect();
-    const data = await CarSchema.find();
-    console.log("Cars data retrieved successfully", data);
+    const data = await BookSchema.find();
+    console.log("Books data retrieved successfully", data);
     return NextResponse.json({ message: "successful", data });
   } catch (error: any) {
-    console.error("Error fetching cars data:", error);
+    console.error("Error fetching books data:", error);
     return NextResponse.json(
-      { message: "Error fetching cars data", error: error.message },
+      { message: "Error fetching cars books", error: error.message },
       { status: 500 }
     );
   }
@@ -21,17 +21,17 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     await connect();
-    const { id, company, model, year } = await req.json();
-    if (!id || !company || !model || !year) {
+    const { name, author, publishYear } = await req.json();
+    if (!name || !author || !publishYear) {
       return NextResponse.json(
         { message: "Missing required fields" },
         { status: 400 }
       );
     }
-    const newCar = new Car({ id, company, model, year });
-    await newCar.save();
+    const newBook = new Book({ name, author, publishYear});
+    await newBook.save();
     return NextResponse.json(
-      { message: "car created successfully", data: newCar },
+      { message: "book created successfully", data: newBook },
       { status: 201 }
     );
   } catch (error: any) {
@@ -42,9 +42,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    console.error("Error creating car:", error);
+    console.error("Error creating book:", error);
     return NextResponse.json(
-      { message: "Error creating car", error },
+      { message: "Error creating book", error },
       { status: 500 }
     );
   }

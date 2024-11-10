@@ -14,9 +14,9 @@ interface Car {
 const CarsPage: React.FC = () => {
   const [cars, setCars] = useState<Car[]>([]);
   const [isAdding, setIsAdding] = useState(false);
-  const [editCarId, setEditCarId] = useState<string | null>(null);
+  const [editObjectId, setEditObjectId] = useState<string | null>(null);
 
-  const [carDetails, setCarDetails] = useState<Partial<Car>>({
+  const [objectDetails, setObjectDetails] = useState<Partial<Car>>({
     id: "",
     company: "",
     model: "",
@@ -41,7 +41,7 @@ const CarsPage: React.FC = () => {
     try {
       const createdCar = await createCar("מספר רישוי", "חברה", "מודל", 2024);
       await fetchCars(); 
-      setCarDetails({ id: "", company: "", model: "", year: 0 });
+      setObjectDetails({ id: "", company: "", model: "", year: 0 });
       setIsAdding(false);
     } catch (error) {
       console.error("שגיאה ביצירת מכונית חדשה:", error);
@@ -49,19 +49,19 @@ const CarsPage: React.FC = () => {
   };
 
   const handleEditCar = (car: Car) => {
-    setEditCarId(car._id);
-    setCarDetails(car);
+    setEditObjectId(car._id);
+    setObjectDetails(car);
   };
 
   const handleSaveCar = async () => {
-    if (editCarId) {
-      const updatedCar = { ...carDetails, _id: editCarId } as Car;
+    if (editObjectId) {
+      const updatedCar = { ...objectDetails, _id: editObjectId } as Car;
 
       try {
         await updateCar(updatedCar);
         await fetchCars();
-        setEditCarId(null);
-        setCarDetails({ id: "", company: "", model: "", year: 0 });
+        setEditObjectId(null);
+        setObjectDetails({ id: "", company: "", model: "", year: 0 });
       } catch (error) {
         console.error("שגיאה בעדכון מכונית:", error);
       }
@@ -92,10 +92,10 @@ const CarsPage: React.FC = () => {
         onDelete={handleDeleteCar}
         onAdd={handleAddCar} 
         isAdding={isAdding}
-        editCarId={editCarId}
-        carDetails={carDetails}
-        setCarDetails={setCarDetails}
-        handleSaveNewCar={handleSaveCar}
+        editObjectId={editObjectId}
+        objectDetails={objectDetails}
+        setObjectDetails={setObjectDetails}
+        handleSaveNewObject={handleSaveCar}
       />
     </div>
   );
