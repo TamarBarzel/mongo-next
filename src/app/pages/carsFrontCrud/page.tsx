@@ -79,7 +79,7 @@ const CarsPage: React.FC = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">רשימת מכוניות</h1>
+      <h1 className="text-2xl font-bold mb-4">cars list</h1>
       <DataTable<Car>
         data={cars}
         columns={[
