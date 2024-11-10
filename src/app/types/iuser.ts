@@ -1,6 +1,6 @@
 import Document from "mongoose";
 
-export default interface ichild extends Document{
+export default interface iuser extends Document{
     email:string,
     firstName:string,
     lastName:string,
