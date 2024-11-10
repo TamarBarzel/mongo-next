@@ -35,13 +35,6 @@ export async function POST(req: NextRequest) {
       { status: 201 }
     );
   } catch (error: any) {
-    if (error.code === 11000 && error.keyPattern && error.keyPattern.id) {
-      return NextResponse.json(
-        { message: "id already exists. Please use a different id." },
-        { status: 409 }  
-      );
-    }
-
     console.error("Error creating book:", error);
     return NextResponse.json(
       { message: "Error creating book", error },

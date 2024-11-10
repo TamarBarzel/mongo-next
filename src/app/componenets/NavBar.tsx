@@ -3,9 +3,10 @@ import Button from "./Button";
 
 const NavBar: React.FC = () => {
   const buttons = [
-    { href: "/pages/homePage", text: "Home Page" },
     { href: "/pages/createUser", text: "Sign up" },
     {href: "/pages/loginUser",text:"Sign in"},
+    {href: "/pages/carsFrontCrud",text:"cars"},
+    {href: "/pages/booksFrontCrud",text:"books"},
 
   ];
 
