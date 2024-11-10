@@ -13,7 +13,6 @@ interface Car {
 
 const CarsPage: React.FC = () => {
   const [cars, setCars] = useState<Car[]>([]);
-  const [isAdding, setIsAdding] = useState(false);
   const [editObjectId, setEditObjectId] = useState<string | null>(null);
 
   const [objectDetails, setObjectDetails] = useState<Partial<Car>>({
@@ -42,7 +41,6 @@ const CarsPage: React.FC = () => {
       const createdCar = await createCar("מספר רישוי", "חברה", "מודל", 2024);
       await fetchCars(); 
       setObjectDetails({ id: "", company: "", model: "", year: 0 });
-      setIsAdding(false);
     } catch (error) {
       console.error("שגיאה ביצירת מכונית חדשה:", error);
     }
@@ -91,7 +89,6 @@ const CarsPage: React.FC = () => {
         onEdit={handleEditCar}
         onDelete={handleDeleteCar}
         onAdd={handleAddCar} 
-        isAdding={isAdding}
         editObjectId={editObjectId}
         objectDetails={objectDetails}
         setObjectDetails={setObjectDetails}

@@ -12,7 +12,6 @@ interface Book {
 
 const BooksPage: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
-  const [isAdding, setIsAdding] = useState(false);
   const [editObjectId, setEditObjectId] = useState<string | null>(null);
 
   const [objectDetails, setObjectDetails] = useState<Partial<Book>>({
@@ -40,7 +39,6 @@ const BooksPage: React.FC = () => {
       const createdBook = await createBook("שם", "סופר/ת", 2024);
       await fetchBooks(); 
       setObjectDetails({ name: "", author: "", publishYear: 0 });
-      setIsAdding(false);
     } catch (error) {
       console.error("שגיאה ביצירת ספר חדש:", error);
     }
@@ -88,7 +86,6 @@ const BooksPage: React.FC = () => {
         onEdit={handleEditBook}
         onDelete={handleDeleteBook}
         onAdd={handleAddBook} 
-        isAdding={isAdding}
         editObjectId={editObjectId}
         objectDetails={objectDetails}
         setObjectDetails={setObjectDetails}
