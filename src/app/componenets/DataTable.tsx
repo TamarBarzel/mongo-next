@@ -27,7 +27,8 @@ const DataTable = <T extends { _id: string }>({
     e: ChangeEvent<HTMLInputElement>,
     key: keyof T
   ) => {
-    setObjectDetails({ ...objectDetails, [key]: e.target.value });
+    const value = e.target.type === "number" ? Number(e.target.value) : e.target.value;
+    setObjectDetails({ ...objectDetails, [key]: value });
   };
 
   return (
@@ -64,10 +65,8 @@ const DataTable = <T extends { _id: string }>({
                 >
                   {editObjectId === item._id ? (
                     <input
-                      type="text"
-                      value={String(
-                        objectDetails[column.key] || item[column.key]
-                      )}
+                      type={typeof item[column.key] === "number" ? "number" : "text"}
+                      value={String(objectDetails[column.key] ?? item[column.key])}
                       onChange={(e) => handleInputChange(e, column.key)}
                       className="border p-1 rounded w-full text-gray-400"
                     />

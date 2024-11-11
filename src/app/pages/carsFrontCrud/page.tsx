@@ -38,11 +38,12 @@ const CarsPage: React.FC = () => {
 
   const handleAddCar = async () => {
     try {
-      const createdCar = await createCar("מספר רישוי", "חברה", "מודל", 2024);
+      const createdCar = await createCar(new Date().toISOString(), "חברה", "מודל", 2024);
       await fetchCars(); 
       setObjectDetails({ id: "", company: "", model: "", year: 0 });
-    } catch (error) {
+    } catch (error:any) {
       console.error("שגיאה ביצירת מכונית חדשה:", error);
+      alert(error.message);
     }
   };
 
@@ -60,8 +61,9 @@ const CarsPage: React.FC = () => {
         await fetchCars();
         setEditObjectId(null);
         setObjectDetails({ id: "", company: "", model: "", year: 0 });
-      } catch (error) {
+      } catch (error:any) {
         console.error("שגיאה בעדכון מכונית:", error);
+        alert(error.message)
       }
     }
   };

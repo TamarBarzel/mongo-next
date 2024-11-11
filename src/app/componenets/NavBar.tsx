@@ -7,6 +7,8 @@ const NavBar: React.FC = () => {
     {href: "/pages/loginUser",text:"Sign in"},
     {href: "/pages/carsFrontCrud",text:"cars"},
     {href: "/pages/booksFrontCrud",text:"books"},
+    {href: "/pages/citiesFrotCrud",text:"cities"},
+
 
   ];
 
