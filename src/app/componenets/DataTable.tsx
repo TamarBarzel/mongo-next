@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 
 interface DataTableProps<T> {
   data: T[];
